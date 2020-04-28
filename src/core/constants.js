@@ -1,0 +1,9 @@
+export const ROOT_SUBSCRIBER = 'recro'
+export const DEFAULT_CHANNEL = 'root'
+export const BROADCAST_CONSUMER = '*'
+
+export const CHANNELS = {
+  NAVIGATION_CHANGE: 'NAVIGATION_CHANGE',
+  SIZE_CHANGE: 'SIZE_CHANGE',
+  APP_LOADED: 'APP_LOADED',
+}
