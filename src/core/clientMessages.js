@@ -6,7 +6,7 @@ const defaultMessage = {
 }
 
 function postMessage(message) {
-  const { origin } = window.parent.location
+  const origin = '*'
   window.parent.postMessage(JSON.stringify(message), origin)
 }
 
@@ -28,4 +28,9 @@ export function generateReady() {
     chanel: CHANNELS.APP_LOADED,
   }
   postMessage(message)
+}
+
+export default {
+  generateResizeMessage,
+  generateReady,
 }
