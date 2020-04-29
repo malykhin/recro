@@ -39,7 +39,7 @@ function reducer(state, action) {
     }
     case TYPES.SET_MODAL_MODE: {
       const subscriber = newState.get(name)
-      newState.set(name, { ...subscriber, isModalMode })
+      newState.set(name, { ...subscriber, isModalMode, size })
       return newState
     }
     default:

@@ -1,9 +1,9 @@
-import { useContext, useEffect, useRef } from 'react'
-import RecroContext from './RecroContext'
+import { useEffect, useRef } from 'react'
+import useRecroContext from './useRecroContext'
 import get from 'lodash/get'
 
 export default function useRecro(name, src, isListenToAppDimensions) {
-  const context = useContext(RecroContext)
+  const context = useRecroContext()
   const ref = useRef(null)
 
   const { origin } = src ? new URL(src) : window.location
