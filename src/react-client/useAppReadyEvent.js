@@ -1,9 +1,9 @@
 import { useEffect } from 'react'
 
-import { generateReady } from '../core/clientMessages'
+import { ready } from '../core/clientMessages'
 
 export default function useAppReadyEvent() {
   useEffect(() => {
-    generateReady()
+    ready()
   }, [])
 }

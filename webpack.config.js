@@ -16,6 +16,6 @@ module.exports = {
   module: {
     rules: [{ test: /\.js$/, loader: 'babel-loader' }],
   },
-
+  externals: ['react'],
   devtool: 'inline-cheap-module-source-map',
 }

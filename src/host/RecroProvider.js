@@ -32,8 +32,12 @@ export default function RecroProvider({
         messageProcessor
           .addHandler(CHANNELS.SIZE_CHANGE, ({ sender, payload }) => actions.changeSize(sender, payload))
           .addHandler(CHANNELS.NAVIGATION_CHANGE, ({ payload: { pathname } }) => history.push(pathname))
-          .addHandler(CHANNELS.APP_LOADED, ({ sender }) =>
-            messagingService.publish({ pathname }, CHANNELS.NAVIGATION_CHANGE, sender),
+          .addHandler(CHANNELS.APP_LOADED, ({ sender }) => {
+            messagingService.publish({ pathname }, CHANNELS.NAVIGATION_CHANGE, sender)
+            actions.setLoaded(sender)
+          })
+          .addHandler(CHANNELS.SET_MODAL_MODE, ({ sender, payload }) =>
+            actions.setModalMode(sender, payload.isOnModalMode),
           )
           .process(JSON.parse(event.data))
       } catch (error) {}

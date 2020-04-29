@@ -10,7 +10,7 @@ function postMessage(message) {
   window.parent.postMessage(JSON.stringify(message), origin)
 }
 
-export function generateResizeMessage(width, height) {
+export function resize(width, height) {
   const message = {
     ...defaultMessage,
     chanel: CHANNELS.SIZE_CHANGE,
@@ -22,7 +22,7 @@ export function generateResizeMessage(width, height) {
   postMessage(message)
 }
 
-export function generateReady() {
+export function ready() {
   const message = {
     ...defaultMessage,
     chanel: CHANNELS.APP_LOADED,
@@ -30,7 +30,21 @@ export function generateReady() {
   postMessage(message)
 }
 
+export function modalMode(isModalMode, width = null, height = null) {
+  const message = {
+    ...defaultMessage,
+    chanel: CHANNELS.SET_MODAL_MODE,
+    payload: {
+      isModalMode,
+      width,
+      height,
+    },
+  }
+  postMessage(message)
+}
+
 export default {
-  generateResizeMessage,
-  generateReady,
+  resize,
+  ready,
+  modalMode,
 }

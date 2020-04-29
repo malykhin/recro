@@ -8,20 +8,19 @@ const TYPES = {
   SUBSCRIBE: 'SUBSCRIBE',
   UNSUBSCRIBE: 'UNSUBSCRIBE',
   CHANGE_SIZE: 'CHANGE_SIZE',
+  SET_LOADED: 'SET_LOADED',
+  SET_MODAL_MODE: 'SET_MODAL_MODE',
 }
 
 const initialState = new Map([[ROOT_SUBSCRIBER, { window }]])
 
 function reducer(state, action) {
   const newState = new Map(state)
-  const { name, window, origin, size } = action.payload
+  const { name, window, origin, size, isOnModalMode } = action.payload
 
   switch (action.type) {
     case TYPES.SUBSCRIBE: {
       newState.set(name, { window, origin })
-      if (newState.has(name)) {
-        return newState
-      }
       return newState
     }
     case TYPES.UNSUBSCRIBE: {
@@ -31,6 +30,16 @@ function reducer(state, action) {
     case TYPES.CHANGE_SIZE: {
       const subscriber = newState.get(name)
       newState.set(name, { ...subscriber, size })
+      return newState
+    }
+    case TYPES.SET_LOADED: {
+      const subscriber = newState.get(name)
+      newState.set(name, { ...subscriber, isLoaded: true })
+      return newState
+    }
+    case TYPES.SET_MODAL_MODE: {
+      const subscriber = newState.get(name)
+      newState.set(name, { ...subscriber, isOnModalMode })
       return newState
     }
     default:
@@ -57,11 +66,22 @@ export const actions = {
       payload: { name, size },
     }
   },
+  setLoaded(name) {
+    return {
+      type: TYPES.SET_LOADED,
+      payload: { name },
+    }
+  },
+  setModalMode(name, isOnModalMode) {
+    return {
+      type: TYPES.SET_MODAL_MODE,
+      payload: { name, isOnModalMode },
+    }
+  },
 }
 
 export default function useRecroReducer() {
   const [state, dispatch] = useReducer(reducer, initialState)
   const bindActions = useMemo(() => bindDispatch(actions, dispatch), [dispatch])
-
   return [state, bindActions]
 }
