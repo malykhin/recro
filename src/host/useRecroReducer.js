@@ -16,7 +16,7 @@ const initialState = new Map([[ROOT_SUBSCRIBER, { window }]])
 
 function reducer(state, action) {
   const newState = new Map(state)
-  const { name, window, origin, size, isOnModalMode } = action.payload
+  const { name, window, origin, size, isModalMode } = action.payload
 
   switch (action.type) {
     case TYPES.SUBSCRIBE: {
@@ -39,7 +39,7 @@ function reducer(state, action) {
     }
     case TYPES.SET_MODAL_MODE: {
       const subscriber = newState.get(name)
-      newState.set(name, { ...subscriber, isOnModalMode })
+      newState.set(name, { ...subscriber, isModalMode })
       return newState
     }
     default:
@@ -72,10 +72,10 @@ export const actions = {
       payload: { name },
     }
   },
-  setModalMode(name, isOnModalMode) {
+  setModalMode(name, isModalMode) {
     return {
       type: TYPES.SET_MODAL_MODE,
-      payload: { name, isOnModalMode },
+      payload: { name, isModalMode },
     }
   },
 }

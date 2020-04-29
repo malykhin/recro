@@ -37,7 +37,7 @@ export default function RecroProvider({
             actions.setLoaded(sender)
           })
           .addHandler(CHANNELS.SET_MODAL_MODE, ({ sender, payload }) =>
-            actions.setModalMode(sender, payload.isOnModalMode),
+            actions.setModalMode(sender, payload.isModalMode),
           )
           .process(JSON.parse(event.data))
       } catch (error) {}
